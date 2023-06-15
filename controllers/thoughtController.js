@@ -51,5 +51,24 @@ module.exports = {
             res.status(500).json(err);
         });
     },
+    // Update a current thought by ID
+    updateThoughts({params, body}, res) {
+        Thoughts.findOneAndUpdate({_id: params.id}, body, {new: true, runValidators: true})
+        .populate({path: 'reactions', select: '-__v'})
+        .select('-__v')
+        .then(dbThoughtsData => {
+            if (!dbThoughtsData) {
+                res.status(404).json({ message: 'No Thoughts linked to this ID!'});
+                return;
+            }
+            res.json(dbThoughtsData);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 
+    },
     
+
+}
