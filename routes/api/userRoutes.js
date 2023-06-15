@@ -4,7 +4,7 @@ const router = require('express').Router();
 // Set the requirements for the user routes
 const {
     getAllUsers,
-    getSingleuser,
+    getSingleUser,
     createUsers,
     updateUsers,
     deleteUsers,
@@ -15,7 +15,7 @@ const {
 // Targets to `/api/users 
 router.route('/').get(getAllUsers).post(createUsers);
 // Targets to `/api/users/:userId
-router.route('/:userId').get(getSingleUser).put(updateUsers).delete(deleteUser);
+router.route('/:userId').get(getSingleUser).put(updateUsers).delete(deleteUsers);
 // Targets to `/api/users/:userId/friends
 router.route('/:userId/friends').post(addFriends);
 // Targets to `/api/users/:userId/friends/:friendsId

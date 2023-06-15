@@ -2,7 +2,7 @@
 const {Thoughts, Users} = require('../models');
 
 // Set up Thoughts controller
-module.exports = {
+const thoughtController = {
     // Creating thoughts
     createThoughts({params, body}, res) {
         Thoughts.create(body)
