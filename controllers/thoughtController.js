@@ -21,5 +21,16 @@ module.exports = {
             res.status(500).json(err);
         });
 
-    }
+    },
+    // get all thoughts
+    getAllThoughts(req,res) {
+        Thoughts.find({})
+        .populate({path: 'reactions', select: '-__v'})
+        .select('-__v')
+        .then(dbThoughtsData => res.json(dbThoughtsData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
 }
