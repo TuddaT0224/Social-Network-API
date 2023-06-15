@@ -105,7 +105,7 @@ const thoughtController = {
     },
     // Delete a reaction by ID
     deleteReaction({params}, res) {
-        Thoughts.findOneAndRemove({_id: params.thoughtId}, {$pull: {reactions: {reactionId: params.reactionId}}}, {new: true})
+        Thoughts.findOneAndUpdate({_id: params.thoughtId}, {$pull: {reactions: {reactionId: params.reactionId}}}, {new: true})
         .then(dbThoughtsData => {
             if (!dbThoughtsData) {
                 res.status(404).json({message:'No Thoughts linked to this ID' });

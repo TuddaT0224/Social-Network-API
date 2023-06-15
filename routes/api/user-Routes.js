@@ -10,14 +10,14 @@ const {
     deleteUsers,
     addFriend,
     deleteFriend
-} = require('../../controllers/userController');
+} = require('../../controllers/user-Controller');
 
 // Targets to `/api/users 
 router.route('/').get(getAllUsers).post(createUsers);
 // Targets to `/api/users/:userId
 router.route('/:userId').get(getSingleUser).put(updateUsers).delete(deleteUsers);
 // Targets to `/api/users/:userId/friends
-router.route('/:userId/friends').post(addFriends);
+router.route('/:userId/friends').post(addFriend);
 // Targets to `/api/users/:userId/friends/:friendsId
 router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend)
 
