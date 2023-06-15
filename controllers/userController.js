@@ -110,7 +110,7 @@ module.exports = {
     
 };
 
-// Export modul users controller
+// Export module users controller
 module.exports = userController;
 
 
