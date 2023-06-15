@@ -5,6 +5,21 @@ const {Thoughts, Users} = require('../models');
 module.exports = {
     // Creating thoughts
     createThoughts({params, body}, res) {
-        
+        Thoughts.create(body)
+        .then(({_id}) => {
+            return Users.findOneAndUpdate({ _id: params.userId}, {$push: {thoughts: _id}}, {new: true});
+        })
+        .then(dbThoughtsData => {
+            if(!dbThoughtsData) {
+                res.status(404).json({message: 'No Thoughts linked to this ID!'});
+                return;
+            }
+            res.json(dbThoughtsData)
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+
     }
 }
