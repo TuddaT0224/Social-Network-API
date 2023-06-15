@@ -69,6 +69,22 @@ module.exports = {
         });
 
     },
+
+    // Delete a current thought by ID
+    deleteThoughts({params}, res) {
+        Thoughts.findOneAndDelete({_id: params.id})
+        .then(dbThoughtsData => {
+            if (!dbThoughtsData) {
+                res.status(404).json({message: 'No Thoughts found!'});
+                return;
+            }
+            res.json(dbThoughtsData);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
     
 
 }
